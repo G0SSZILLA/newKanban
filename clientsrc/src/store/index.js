@@ -22,6 +22,8 @@ export default new Vuex.Store({
         boards: [],
         activeBoard: {},
         board: {},
+        lists: [],
+        // activeLists: [],
     },
     mutations: {
         setUser(state, user) {
@@ -33,6 +35,12 @@ export default new Vuex.Store({
         setActiveBoard(state, board) {
             state.activeBoard = board;
         },
+        setLists(state, lists) {
+            state.lists = lists;
+        },
+        // setActiveLists(state, list) {
+        //     state.activeLists =
+        // }
     },
     actions: {
         //#region -- AUTH STUFF --
@@ -105,7 +113,16 @@ export default new Vuex.Store({
         //#endregion
 
         //#region -- LISTS --
+        async getList({ commit, dispatch }, boardId) {
+            try {
+                let res = await api.get('boards/' + boardId + '/lists')
+                console.log('from get list', res);
+                commit('setLists', res.data)
+            } catch (error) {
+                console.error(error);
 
+            }
+        }
         //#endregion
     },
 });

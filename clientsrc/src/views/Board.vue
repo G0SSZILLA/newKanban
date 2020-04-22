@@ -21,11 +21,12 @@
             </form>
             </span>
     <h1 v-if="board.title">{{board.title}}</h1>
-    
+    <List v-for='list in lists' :listData='list' :key="list._id"/>
   </div>
 </template>
 
 <script>
+import createList from '../components/CreateList.vue'
 import List from '../components/List.vue'
 export default {
   name: "board",
@@ -37,10 +38,14 @@ export default {
   },
     mounted(){
 this.$store.dispatch('getBoard', this.$route.params.boardId)
+this.$store.dispatch('getList', this.$route.params.boardId)
     },
   computed: {
     board() {
       return this.$store.state.activeBoard;
+    },
+    lists() {
+      return this.$store.state.lists
     }
   },
   methods: {
@@ -53,5 +58,6 @@ this.$store.dispatch('getBoard', this.$route.params.boardId)
       this.editing = false
     }
   },
+   components: {List,createList}
 };
 </script>
