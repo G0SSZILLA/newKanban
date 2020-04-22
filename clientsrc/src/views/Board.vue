@@ -1,5 +1,7 @@
 <template>
-  <div class="board">
+  <div class="board row container-fluid">
+    <div class="col-12">
+
     <button
               v-if="$auth.isAuthenticated"
               class="btn btn-danger shadow"
@@ -21,6 +23,7 @@
             </form>
             </span>
     <h1 v-if="board.title">{{board.title}}</h1>
+    </div>
     <List v-for='list in lists' :listData='list' :key="list._id"/>
   </div>
 </template>

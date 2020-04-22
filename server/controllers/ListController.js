@@ -12,7 +12,8 @@ export class ListController extends BaseController {
             .get("/:id", this.getById)
             .post("", this.create)
             .put("/:id", this.edit)
-            .delete("/:id", this.delete);
+            .delete("/:id/lists", this.deleteListByBoardId)
+            // .delete("/:id/lists", this.delete);
     }
 
     async getAll(req, res, next) {
@@ -56,9 +57,9 @@ export class ListController extends BaseController {
         }
     }
 
-    async delete(req, res, next) {
+    async deleteListByBoardId(req, res, next) {
         try {
-            await listService.delete(req.params.id, req.userInfo.email);
+            await listService.deleteListByBoardId(req.params.id);
             return res.status(204).send("Successfully deleted");
         } catch (error) {
             next(error);

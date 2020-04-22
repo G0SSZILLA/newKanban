@@ -32,8 +32,8 @@ class ListService {
         return data
     }
 
-    async delete(id, userEmail) {
-        let data = await dbContext.Lists.findByIdAndRemove({ _id: id, creatorEmail: userEmail })
+    async deleteListByBoardId(id) {
+        let data = await dbContext.Lists.findByIdAndRemove({ boardId: id, listId: id })
         if (!data) {
             throw new BadRequest('Invalid ID or you do not own this board')
         }

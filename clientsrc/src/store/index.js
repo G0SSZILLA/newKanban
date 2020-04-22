@@ -119,8 +119,17 @@ export default new Vuex.Store({
                 console.log('from get list', res);
                 commit('setLists', res.data)
             } catch (error) {
-                console.error(error);
+                console.error(error, "getList Failed");
 
+            }
+        },
+        async deleteList({ commit, dispatch }, listData) {
+            try {
+                console.log("deleteList log", listData);
+                await api.delete('boards/' + listData + '/lists' + listData._id)
+                dispatch('getLists')
+            } catch (error) {
+                console.error(error, "deleteList failed");
             }
         }
         //#endregion
