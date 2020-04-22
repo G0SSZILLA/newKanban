@@ -2,6 +2,10 @@ import { dbContext } from "../db/DbContext"
 import { BadRequest } from "../utils/Errors"
 
 class ListService {
+    async getListByBoardId(id, email) {
+        return await dbContext.Lists.find({ creatorEmail: email, boardId: id }).populate('creator', 'name picture')
+
+    }
 
     async getAll(userEmail) {
         return await dbContext.Lists.find({ creatorEmail: userEmail }).populate('creator', 'name picture')

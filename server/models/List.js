@@ -40,4 +40,4 @@ List.pre('findOneAndRemove', function(next) {
         .catch(err => next(err))
 })
 
-export default List
+export default List;

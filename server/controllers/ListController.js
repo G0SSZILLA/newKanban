@@ -5,7 +5,7 @@ import { listService } from "../services/ListService";
 
 export class ListController extends BaseController {
     constructor() {
-        super("api/boards");
+        super("api/lists");
         this.router
             .use(auth0provider.getAuthorizedUserInfo)
             .get("", this.getAll)
