@@ -72,7 +72,7 @@ export default new Vuex.Store({
         async getBoard({ commit, dispatch }, boardId) {
             try {
                 let res = await api.get(`boards/${boardId}`);
-                console.log("activeBlog", res.data);
+                console.log("activeBoard", res.data);
                 commit("setActiveBoard", res.data);
             } catch (error) {
                 console.error(error);
