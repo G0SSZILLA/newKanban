@@ -23,6 +23,10 @@ export default new Vuex.Store({
         activeBoard: {},
         board: {},
         lists: [],
+        tasks: {
+            //this is a list id
+            "5ea09da546fb313afc19370d": [{ title: "task One" }]
+        }
         // activeLists: [],
     },
     mutations: {
@@ -126,8 +130,8 @@ export default new Vuex.Store({
         async deleteList({ commit, dispatch }, list) {
             try {
                 console.log("deleteList log", list);
-                await api.delete('boards/' + '/lists', list.id)
-                dispatch('getLists', list.boardId)
+                await api.delete('lists/' + list.id)
+                dispatch('getList', list.boardId)
             } catch (error) {
                 console.error(error, "deleteList failed");
             }

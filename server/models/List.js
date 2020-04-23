@@ -18,27 +18,27 @@ List.virtual("creator", {
     justOne: true
 })
 
-//CASCADE ON DELETE
-List.pre('deleteMany', function(next) {
-    //lets us find all the lists and remove them and orphans
-    Promise.all([
-            //something like...
-            // @ts-ignore
-            dbContext.Tasks.deleteMany({ listId: this._conditions_id }),
-        ])
-        .then(() => next())
-        .catch(err => next(err))
-})
+// //CASCADE ON DELETE
+// List.pre('deleteMany', function(next) {
+//     //lets us find all the lists and remove them and orphans
+//     Promise.all([
+//             //something like...
+//             // @ts-ignore
+//             dbContext.Tasks.deleteMany({ listId: this._conditions_id }),
+//         ])
+//         .then(() => next())
+//         .catch(err => next(err))
+// })
 
-//CASCADE ON DELETE
-List.pre('findOneAndRemove', function(next) {
-    //lets us find the list and remove it
-    Promise.all([
-            // @ts-ignore
-            dbContext.Lists.findOneAndRemove({ listId: this._conditions._id })
-        ])
-        .then(() => next())
-        .catch(err => next(err))
-})
+// //CASCADE ON DELETE
+// List.pre('findOneAndRemove', function(next) {
+//     //lets us find the list and remove it
+//     Promise.all([
+//             // @ts-ignore
+//             dbContext.Lists.findOneAndRemove({ listId: this._conditions._id })
+//         ])
+//         .then(() => next())
+//         .catch(err => next(err))
+// })
 
 export default List;

@@ -2,13 +2,13 @@ import { dbContext } from "../db/DbContext"
 import { BadRequest } from "../utils/Errors"
 
 
-class BoardService {
+class TaskService {
     async getAll(userEmail) {
-        return await dbContext.Boards.find({ creatorEmail: userEmail }).populate("creator", "name picture")
+        return await dbContext.Tasks.find({ creatorEmail: userEmail }).populate("creator", "name picture")
     }
 
     async getById(id, userEmail) {
-        let data = await dbContext.Boards.findOne({ _id: id, creatorEmail: userEmail })
+        let data = await dbContext.Tasks.findOne({ _id: id, creatorEmail: userEmail })
         if (!data) {
             throw new BadRequest("Invalid ID or you do not own this board")
         }
@@ -16,12 +16,12 @@ class BoardService {
     }
 
     async create(rawData) {
-        let data = await dbContext.Boards.create(rawData)
+        let data = await dbContext.Tasks.create(rawData)
         return data
     }
 
     async edit(id, userEmail, update) {
-        let data = await dbContext.Boards.findOneAndUpdate({ _id: id, creatorEmail: userEmail }, update, { new: true })
+        let data = await dbContext.Tasks.findOneAndUpdate({ _id: id, creatorEmail: userEmail }, update, { new: true })
         if (!data) {
             throw new BadRequest("Invalid ID or you do not own this board");
         }
@@ -29,7 +29,7 @@ class BoardService {
     }
 
     async delete(id, userEmail) {
-        let data = await dbContext.Boards.findOneAndRemove({ _id: id, creatorEmail: userEmail });
+        let data = await dbContext.Tasks.findOneAndRemove({ _id: id, creatorEmail: userEmail });
         if (!data) {
             throw new BadRequest("Invalid ID or you do not own this board");
         }
@@ -39,4 +39,4 @@ class BoardService {
 }
 
 
-export const boardService = new BoardService()
+export const taskService = new TaskService()

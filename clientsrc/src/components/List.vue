@@ -33,6 +33,7 @@
       </div>
       <div class="card-body">
         <!-- NOTE tasks go here -->
+        <Task v-for='task in tasks' :taskData='list' :key="task._id"/>
       </div>
       <div class="card-footer">
         <h5>{{listData.creator.name}}</h5>
@@ -43,6 +44,8 @@
 
 
 <script>
+import Task from '../components/Task.vue'
+// NOTE NEED TO FINISH FUNCTIONALITY!!!!!!!
 export default {
   name: "List",
   props: ["listData"],
@@ -69,7 +72,7 @@ export default {
       this.editing = false
     }
   },
-  components: {}
+  components: {Task}
 };
 </script>
 

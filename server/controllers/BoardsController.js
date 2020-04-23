@@ -18,7 +18,7 @@ export class BoardsController extends BaseController {
             .post('', this.create)
             .put('/:id', this.edit)
             .delete('/:id', this.delete)
-            .delete('/:id/lists', this.deleteListByBoardId)
+            // .delete('/:id/lists', this.deleteListByBoardId)
     }
 
 
@@ -60,17 +60,18 @@ export class BoardsController extends BaseController {
     }
 
     async delete(req, res, next) {
-        try {
-            await boardService.delete(req.params.id, req.userInfo.email)
-            return res.send("Successfully deleted")
-        } catch (error) { next(error) }
-    }
-    async deleteListByBoardId(req, res, next) {
-        try {
-            await listService.delete(req.params.id, )
-            return res.send("Successfully deleted")
-        } catch (error) {
-            next(error)
+            try {
+                await boardService.delete(req.params.id, req.userInfo.email)
+                return res.send("Successfully deleted")
+            } catch (error) { next(error) }
         }
-    }
+        // async deleteListByBoardId(req, res, next) {
+        //     try {
+        //         // @ts-ignore
+        //         await listService.delete(req.params.id, req.userInfo.email)
+        //         return res.send("Successfully deleted")
+        //     } catch (error) {
+        //         next(error)
+        //     }
+        // }
 }
