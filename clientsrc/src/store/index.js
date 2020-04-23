@@ -12,7 +12,7 @@ let base = window.location.host.includes("localhost") ?
 
 let api = Axios.create({
     baseURL: base + "api/",
-    timeout: 10000,
+    timeout: 15000,
     withCredentials: true,
 });
 
@@ -123,11 +123,11 @@ export default new Vuex.Store({
 
             }
         },
-        async deleteList({ commit, dispatch }, listData) {
+        async deleteList({ commit, dispatch }, list) {
             try {
-                console.log("deleteList log", listData);
-                await api.delete('boards/' + listData + '/lists' + listData._id)
-                dispatch('getLists')
+                console.log("deleteList log", list);
+                await api.delete('boards/' + '/lists', list.id)
+                dispatch('getLists', list.boardId)
             } catch (error) {
                 console.error(error, "deleteList failed");
             }

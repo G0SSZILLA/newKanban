@@ -31,13 +31,19 @@ class ListService {
         }
         return data
     }
-
-    async deleteListByBoardId(id) {
-        let data = await dbContext.Lists.findByIdAndRemove({ boardId: id, listId: id })
+    async delete(id) {
+        let data = await dbContext.Lists.findByIdAndRemove({ _id: id })
         if (!data) {
             throw new BadRequest('Invalid ID or you do not own this board')
         }
     }
+
+    // async deleteListByListId(id) {
+    //     let data = await dbContext.Lists.findByIdAndRemove({ _id: id })
+    //     if (!data) {
+    //         throw new BadRequest('Invalid ID or you do not own this board')
+    //     }
+    // }
 
 }
 
