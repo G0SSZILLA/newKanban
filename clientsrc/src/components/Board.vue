@@ -2,7 +2,7 @@
   <div class="Board col-4">
     <div class="m-auto pt-5" @click="selectBoard()">
       <!-- Card -->
-      <div class="card card-image shadow">
+      <div class="card bg-dark card-image shadow">
       
         <!-- style="background-image: url(https://mdbootstrap.com/img/Photos/Horizontal/Work/4-col/img%20%2814%29.jpg);" -->
         <div class="text-black text-center align-items-center rgba-black-strong py-5 px-4">
@@ -44,4 +44,7 @@ export default {
 
 
 <style scoped>
+.design{
+  background-color: rgba(0, 0, 0, 0.479);
+}
 </style>

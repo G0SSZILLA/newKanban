@@ -22,7 +22,7 @@
               >Confirm</button>
             </form>
             </span>
-    <h1 v-if="board.title">{{board.title}}</h1>
+    <h1 v-if="board.title" class="boardTitle">{{board.title}}</h1>
     </div>
     <List v-for='list in lists' :listData='list' :key="list._id"/>
      
@@ -43,7 +43,7 @@ export default {
   },
     mounted(){
 this.$store.dispatch('getBoard', this.$route.params.boardId)
-this.$store.dispatch('getList', this.$route.params.boardId)
+this.$store.dispatch('getLists', this.$route.params.boardId)
     },
   computed: {
     board() {
@@ -83,4 +83,8 @@ this.$store.dispatch('getList', this.$route.params.boardId)
 .row{
   height: 92vh;
 }
+.boardTitle{
+  color:#d7dde0;
+}
+
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div class="List col-2 m-auto">
-    <div class="card shadow">
+    <div class="card bg-dark text-light shadow">
       <div class="row">
         <!-- NOTE edit button -->
         <div class="col-6 text-left">
