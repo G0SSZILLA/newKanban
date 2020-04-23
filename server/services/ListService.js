@@ -38,12 +38,12 @@ class ListService {
         }
     }
 
-    // async deleteListByListId(id) {
-    //     let data = await dbContext.Lists.findByIdAndRemove({ _id: id })
-    //     if (!data) {
-    //         throw new BadRequest('Invalid ID or you do not own this board')
-    //     }
-    // }
+    async deleteListByBoardId(id, userEmail) {
+        let data = await dbContext.Lists.findByIdAndRemove({ _id: id, creatorEmail: userEmail })
+        if (!data) {
+            throw new BadRequest('Invalid ID or you do not own this board')
+        }
+    }
 
 }
 
