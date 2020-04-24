@@ -21,13 +21,13 @@ export default new Vuex.Store({
         user: {},
         boards: [],
         activeBoard: {},
+        activeList: {},
         board: {},
         lists: [],
-        tasks: {
-            //this is a list id
-            "5ea09da546fb313afc19370d": [{ title: "task One" }]
-        }
-        // activeLists: [],
+        tasks: {},
+        comments: {}
+        //this is a list id
+        // "5ea09da546fb313afc19370d": [{ title: "task One" }]
     },
     mutations: {
         setUser(state, user) {
@@ -39,12 +39,18 @@ export default new Vuex.Store({
         setActiveBoard(state, board) {
             state.activeBoard = board;
         },
+        setActiveList(state, list) {
+            state.activeList = list
+        },
         setLists(state, lists) {
             state.lists = lists;
         },
-        // setActiveLists(state, list) {
-        //     state.activeLists =
-        // }
+        setTasks(state, payload) {
+            Vue.set(state.tasks, payload.listId, payload.tasks);
+        },
+        setComments(state, payload) {
+            Vue.set(state.comments, payload.taskId, payload.comments);
+        }
     },
     actions: {
         //#region -- AUTH STUFF --
@@ -135,7 +141,80 @@ export default new Vuex.Store({
             } catch (error) {
                 console.error(error, "deleteList failed");
             }
-        }
+        },
+
+        async editList({ dispatch }, list) {
+            try {
+                console.log('edit list in store', list);
+                // TODO getting 404 on submit edit(BUT WORKS)
+                await api.put('lists/' + list.id, list)
+                dispatch('getBoard', list)
+            } catch (error) {
+                console.error(error, 'editBoard is Failing');
+            }
+        },
+
+        async addList({ commit, dispatch }, listId) {
+            console.log("new list", listId);
+
+            try {
+                let res = await api.post('lists/', listId)
+                console.log("list data from addList", res);
+                // NOTE need to fix dispatch for this function!
+                dispatch("getList", listId.boardId)
+            } catch (error) {
+                console.error(error, "addList Failing");
+            }
+
+        },
         //#endregion
+
+        // #region --TASKS--
+
+        async getTasks({ commit, dispatch }, listId) {
+            try {
+                let res = await api.get('lists/' + listId + '/tasks')
+                console.log('from get tasks', res);
+                commit('setTasks', { listId, tasks: res.data })
+            } catch (error) {
+                console.error(error, "getTasks Failed");
+
+            }
+        },
+        async addTask({ commit, dispatch }, listId) {
+            console.log("new task", listId);
+            try {
+                let res = await api.post('tasks/', listId)
+                console.log("list data from addTask", res);
+                // NOTE need to fix dispatch for this function!
+                dispatch("getTasks", listId.listId)
+            } catch (error) {
+                console.error(error, "addTask Failing");
+            }
+        },
+        async deleteTask({ commit, dispatch }, taskId) {
+            try {
+                console.log("deleteTask log", taskId);
+                await api.delete('tasks/' + taskId.id)
+                dispatch('getTasks', taskId.listId)
+            } catch (error) {
+                console.error(error, "deleteTask failed");
+            }
+        },
+        // //#endregion
+
+        // #region --COMMENTS--
+        async getComments({ commit, dispatch }, taskId) {
+            try {
+                let res = await api.get('tasks/' + taskId + '/comments')
+                console.log('from get comments', res);
+                commit('setComments', { taskId, comments: res.data })
+            } catch (error) {
+                console.error(error, "getComments Failed");
+
+            }
+        },
+
+        // //#endregion
     },
 });
