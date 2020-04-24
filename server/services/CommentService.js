@@ -2,9 +2,9 @@ import { dbContext } from "../db/DbContext"
 import { BadRequest } from "../utils/Errors"
 
 
-class TaskService {
-    async getTaskByListId(id, userEmail) {
-            return await dbContext.Tasks.find({ listId: id, creatorEmail: userEmail })
+class CommentService {
+    async getCommentByTaskId(id, userEmail) {
+            return await dbContext.Comment.find({ listId: id, creatorEmail: userEmail })
                 // .populate('creator', 'name', 'picture')
         }
         // async getAll(userEmail) {
@@ -12,7 +12,7 @@ class TaskService {
         // }
 
     async getById(id, userEmail) {
-        let data = await dbContext.Tasks.findOne({ _id: id, creatorEmail: userEmail })
+        let data = await dbContext.Comment.findOne({ _id: id, creatorEmail: userEmail })
         if (!data) {
             throw new BadRequest("Invalid ID or you do not own this board")
         }
@@ -20,12 +20,12 @@ class TaskService {
     }
 
     async create(rawData) {
-        let data = await dbContext.Tasks.create(rawData)
+        let data = await dbContext.Comment.create(rawData)
         return data
     }
 
     async edit(id, userEmail, update) {
-        let data = await dbContext.Tasks.findOneAndUpdate({ _id: id, creatorEmail: userEmail }, update, { new: true })
+        let data = await dbContext.Comment.findOneAndUpdate({ _id: id, creatorEmail: userEmail }, update, { new: true })
         if (!data) {
             throw new BadRequest("Invalid ID or you do not own this board");
         }
@@ -33,7 +33,7 @@ class TaskService {
     }
 
     async delete(id, userEmail) {
-        let data = await dbContext.Tasks.findOneAndRemove({ _id: id, creatorEmail: userEmail });
+        let data = await dbContext.Comment.findOneAndRemove({ _id: id, creatorEmail: userEmail });
         if (!data) {
             throw new BadRequest("Invalid ID or you do not own this board");
         }
@@ -43,4 +43,4 @@ class TaskService {
 }
 
 
-export const taskService = new TaskService()
+export const commentService = new CommentService()
