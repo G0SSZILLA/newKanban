@@ -1,12 +1,16 @@
 <template>
   <div class="CreateList">
-    <form>
+    <form class="row">
+      <div class="col-6">
       <input
         type="text"
-        class="form-control w-50"
+        class="form-control w-125"
         placeholder="Add List..."
         v-model="newList.title"/>
-      <button type="submit" class="btn btn-primary d-flex" @click="addList()">Create</button>
+      </div>
+      <div class="col-6 text-left">
+      <button type="submit" class="btn btn-warning d-flex" @click="addList()">Create</button>
+      </div>
     </form>
   </div>
 </template>

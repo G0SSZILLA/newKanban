@@ -8,8 +8,8 @@
     <div class="card pt-0 card-body text-dark">
     <div class="row">
 <div class="col-6 text-left pl-0 mt-1">
-    <button class="btn btn-sm btn-danger" @click="deleteTask()" v-if="$auth.isAuthenticated">
-            <span>&times;</span>
+    <button class="btn  bg-transparent border-0" @click="deleteTask()" v-if="$auth.isAuthenticated">
+            <span>X</span>
           </button>
 </div>
 <div class="col-6"></div>
