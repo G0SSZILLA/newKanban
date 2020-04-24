@@ -7,7 +7,7 @@ const Comment = new Schema({
         title: { type: String, required: true },
         creatorEmail: { type: String, required: false },
         taskId: { type: ObjectId, ref: 'Tasks' },
-        listId: { type: ObjectId, ref: 'Lists' },
+
     }, { timestamps: true, toJSON: { virtuals: true } })
     // NOTE DO WE NEED CASCADE ON DELETE?
 

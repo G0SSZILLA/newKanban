@@ -1,6 +1,6 @@
 <template>
   <div class="board container-fluid backgroundImg">
-    <div class="row" style="height:4rem">
+    <div class="row bg-dark" style="height:4rem">
       <div class="col-3 mt-3">
         <CreateList v-if="$auth.isAuthenticated"/>
       </div>
@@ -97,5 +97,6 @@ export default {
 }
 .boardTitle {
   color: #d7dde0;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 </style>

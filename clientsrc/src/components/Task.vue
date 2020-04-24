@@ -5,16 +5,32 @@
   @dragstart="dragStart"
   @dragover.stop-->
   <div class="Task mb-3">
-    <div class="card pt-0 card-body text-dark">
+    <div class="card pt-0 card-body bg-light text-dark">
       <div class="row">
         <div class="col-6 text-left pl-0 mt-1">
           <button
             class="btn bg-transparent border-0"
             @click="deleteTask()"
-            v-if="$auth.isAuthenticated"
-          >
+            v-if="$auth.isAuthenticated">
             <span>X</span>
           </button>
+
+          <!-- DROPDOWN START -->
+          <div class="btn-group mb-1 ml-1">
+            <button
+              class="btn btn-warning btn-sm moveTask dropdown-toggle"
+              type="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >Move</button>
+            <div class="dropdown-menu">
+              <div v-for="list in lists" :key="list._id">
+                <p class="dropdown-item" @click="moveTask(list._id)">{{list.title}}</p>
+              </div>
+            </div>
+          </div>
+          <!-- DROPDOWN END -->
         </div>
         <div class="col-6"></div>
       </div>
@@ -25,24 +41,8 @@
 
       <Comment v-for="comment in comments" :commentData="comment" :key="comment._id" />
       <div class="row justify-content-center">
-        <!-- DROPDOWN START -->
-        <div class="btn-group">
-          <button
-            class="btn btn-warning btn-sm moveTask dropdown-toggle"
-            type="button"
-            data-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded="false"
-          >Move</button>
-          <div class="dropdown-menu">
-            <div v-for="list in lists" :key="list._id">
-              <p class="dropdown-item" @click="moveTask(list._id)">{{list.title}}</p>
-            </div>
-          </div>
-        </div>
-        <!-- DROPDOWN END -->
         <form class="row">
-          <div class="col-6">
+          <div class="col-6 pr-1">
             <input
               type="text"
               class="form-control pl-0 w-100"
@@ -90,7 +90,7 @@ export default {
     moveTask(list) {
       let listIDs = {
         oldListId: this.taskData.listId,
-        newListId: list.id,
+        newListId: list._id,
         taskId: this.taskData._id
       };
       console.log(listIDs);

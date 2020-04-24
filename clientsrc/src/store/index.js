@@ -236,8 +236,9 @@ export default new Vuex.Store({
         async getComments({ commit, dispatch }, taskId) {
             try {
                 let res = await api.get('tasks/' + taskId + '/comments')
-                console.log('from get comments', res);
+                console.log('from get comments', res.data);
                 commit('setComments', { taskId, comments: res.data })
+                debugger
             } catch (error) {
                 console.error(error, "getComments Failed");
 

@@ -16,7 +16,7 @@ class DbContext {
 
     Tasks = mongoose.model('Task', TaskSchema);
 
-    Comment = mongoose.model('Comment', TaskSchema)
+    Comment = mongoose.model('Comment', CommentSchema)
 }
 
 

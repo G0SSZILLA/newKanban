@@ -12,7 +12,7 @@
           <span>
             <button
               v-if="$auth.isAuthenticated"
-              class="btn btn-warning shadow"
+              class="btn bg-transparent text-white shadow"
               @click="editing = !editing"
             >Edit</button>
             <form v-if="editing" @submit.prevent="editList">
@@ -20,7 +20,7 @@
               <button
                 type="submit"
                 v-if="$auth.isAuthenticated"
-                class="btn btn-success shadow"
+                class="btn btn-warning shadow"
               >Confirm</button>
             </form>
           </span>
@@ -28,8 +28,9 @@
         <!-- NOTE delete button -->
 
         <div class="col-6 text-right">
-          <button class="btn btn-danger" @click="deleteList()" v-if="$auth.isAuthenticated">
-            <span>&times;</span>
+          <button class="btn bg-transparent" @click="deleteList()" v-if="$auth.isAuthenticated">
+            <span class="text-success"><strong>X</strong>
+              </span>
           </button>
         </div>
       </div>
