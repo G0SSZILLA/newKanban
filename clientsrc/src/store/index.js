@@ -25,6 +25,7 @@ export default new Vuex.Store({
         board: {},
         lists: [],
         tasks: {},
+        activeTask: {},
         comments: {}
         //this is a list id
         // "5ea09da546fb313afc19370d": [{ title: "task One" }]
@@ -41,6 +42,9 @@ export default new Vuex.Store({
         },
         setActiveList(state, list) {
             state.activeList = list
+        },
+        setActiveTask(state, task) {
+            state.activeTask = task
         },
         setLists(state, lists) {
             state.lists = lists;
@@ -207,6 +211,25 @@ export default new Vuex.Store({
                 console.error(error, 'editTask is Failing');
             }
         },
+
+        async moveTask({ commit, dispatch }, listIDs) {
+            try {
+                let res = await api.put('tasks/' + listIDs.taskId, listIDs)
+                    // dispatch('getTasks', listIDs.oldListId)
+                dispatch('getTasks', listIDs.newListId)
+            } catch (error) {
+                console.error(error)
+            }
+        },
+
+        async setActiveTask({ commit, dispatch }, task) {
+            try {
+                let res = await api.get('tasks/' + task._id)
+                commit('setActiveTask', res.data)
+            } catch (error) {
+                console.error(error)
+            }
+        },
         // //#endregion
 
         // #region --COMMENTS--
@@ -221,16 +244,24 @@ export default new Vuex.Store({
             }
         },
 
-        async addComment({ commit, dispatch }, commentId) {
-            console.log("newComment", commentId);
+        async addComment({ commit, dispatch }, comment) {
             try {
-                let res = await api.post('comments/', commentId)
-                console.log("list data from addComment", res);
-                dispatch("getComments", commentId.taskId)
+                console.log(comment)
+                let res = await api.post('comments/', comment)
+                dispatch('getComments', comment.taskId)
             } catch (error) {
-                console.error(error, "addTask Failing");
+                console.error(error)
             }
         },
+
+        async deleteComment({ commit, dispatch }, comment) {
+            try {
+                let res = await api.delete('comments/' + comment._id, comment)
+                dispatch('getComments', comment.taskId)
+            } catch (error) {
+                console.error(error)
+            }
+        }
 
         // //#endregion
     },

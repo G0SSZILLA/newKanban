@@ -43,14 +43,17 @@
       <div class="card-footer">
         <div class="row m-auto">
           <div class="col-12">
-           
-            <form>
+            <form class="row pb-2">
+              <div class="col-5 pr-0 pl-0 ">
               <input
                 type="text"
-                class="form-control text-center w-50"
+                class="form-control text-center w-100"
                 placeholder="Add Task..."
                 v-model="newTask.title"/>
-              <button type="submit" class="btn btn-sm btn-warning d-flex" @click="addTask()">Create</button>
+              </div>
+              <div class="col-7 pl-2">
+              <button type="submit" class="btn btn-warning d-flex" @click="addTask()">Create</button>
+              </div>
             </form>
           </div>
         </div>

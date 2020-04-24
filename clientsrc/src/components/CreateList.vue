@@ -1,14 +1,14 @@
 <template>
   <div class="CreateList">
     <form class="row">
-      <div class="col-6">
+      <div class="col-6 pr-1">
       <input
         type="text"
         class="form-control w-125"
         placeholder="Add List..."
         v-model="newList.title"/>
       </div>
-      <div class="col-6 text-left">
+      <div class="col-6 text-lef pl-0">
       <button type="submit" class="btn btn-warning d-flex" @click="addList()">Create</button>
       </div>
     </form>
