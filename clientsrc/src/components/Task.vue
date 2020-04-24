@@ -5,7 +5,7 @@
   @dragstart="dragStart"
   @dragover.stop -->
   <div class="Task mb-3">
-    <div class="card pt-0 card-body text-dark" @click="selectTask()">
+    <div class="card pt-0 card-body text-dark">
     <div class="row">
 <div class="col-6 text-left pl-0 mt-1">
     <button class="btn btn-sm btn-danger" @click="deleteTask()" v-if="$auth.isAuthenticated">
@@ -16,6 +16,7 @@
     </div>
       <h5>{{taskData.title}}</h5>
 
+        <Comment v-for="comment in comments" :commentData="comment" :key="comment._id"/>
       <div class="row justify-content-center">
         <!-- DROPDOWN START -->
         <div class="btn-group">
@@ -28,12 +29,19 @@
           >Move</button>
           <div class="dropdown-menu">
             <div v-for="list in lists" :key="list._id">
-              <p class="dropdown-item" @click="moveTask()">{{list.title}}</p>
+              <p class="dropdown-item" @click="moveTask(list._id)">{{list.title}}</p>
             </div>
           </div>
         </div>
         <!-- DROPDOWN END -->
-        <!-- NOTE add @click and tie into a computed method! -->
+    <form>
+              <input
+                type="text"
+                class="form-control text-center w-50"
+                placeholder="Add comment..."
+                v-model="newComment.title"/> 
+              <button type="submit" class="btn btn-sm btn-warning d-flex" @click="addComment()">+</button>
+            </form>
       </div>
     </div>
     
@@ -42,16 +50,23 @@
 
 
 <script>
+
+import Comment from '../components/Comment.vue'
 export default {
   name: "Task",
   props: ["taskData",],
   data() {
-    return {};
+    return {
+      newComment:{}
+    };
   },
   computed: {
     lists() {
       return this.$store.state.lists;
     },
+   comments() {
+      return this.$store.state.comments[this.taskData.id];
+    }
   },
   methods: {
     deleteTask() {
@@ -65,7 +80,18 @@ export default {
       //   params: { boardId: this.boardData._id }
       // });
     },
+    moveTask(listId){
+      // TODO need to figure this out ask D$ in the morning!!!!
+      this.taskData.listId = listId
+      this.$store.commit("editTask")
+    },
 
+     addComment() {
+      this.newComment.taskId = this.taskData.id;
+      console.log("addComment", this.newComment);
+      this.$store.dispatch("addComment", this.newComment);
+      this.newComment = {};
+    }
 //     dragStart: event =>{
 //       let target = event.target
 //       // set data is like local storage but in our file structure
@@ -83,7 +109,7 @@ export default {
     //     params: { boardId: this.boardData._id }
     //   });
     // },
-  components: {}
+  components: {Comment}
   }
 
 </script>

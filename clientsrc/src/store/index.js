@@ -146,7 +146,6 @@ export default new Vuex.Store({
         async editList({ dispatch }, list) {
             try {
                 console.log('edit list in store', list);
-                // TODO getting 404 on submit edit(BUT WORKS)
                 await api.put('lists/' + list.id, list)
                 dispatch('getBoard', list)
             } catch (error) {
@@ -160,7 +159,6 @@ export default new Vuex.Store({
             try {
                 let res = await api.post('lists/', listId)
                 console.log("list data from addList", res);
-                // NOTE need to fix dispatch for this function!
                 dispatch("getList", listId.boardId)
             } catch (error) {
                 console.error(error, "addList Failing");
@@ -186,7 +184,6 @@ export default new Vuex.Store({
             try {
                 let res = await api.post('tasks/', listId)
                 console.log("list data from addTask", res);
-                // NOTE need to fix dispatch for this function!
                 dispatch("getTasks", listId.listId)
             } catch (error) {
                 console.error(error, "addTask Failing");
@@ -201,6 +198,15 @@ export default new Vuex.Store({
                 console.error(error, "deleteTask failed");
             }
         },
+        async editTask({ commit, dispatch }, list) {
+            try {
+                console.log('edit task in store', list);
+                await api.put('tasks/' + list.id, list)
+                dispatch('getTasks', list.listId)
+            } catch (error) {
+                console.error(error, 'editTask is Failing');
+            }
+        },
         // //#endregion
 
         // #region --COMMENTS--
@@ -212,6 +218,17 @@ export default new Vuex.Store({
             } catch (error) {
                 console.error(error, "getComments Failed");
 
+            }
+        },
+
+        async addComment({ commit, dispatch }, commentId) {
+            console.log("newComment", commentId);
+            try {
+                let res = await api.post('comments/', commentId)
+                console.log("list data from addComment", res);
+                dispatch("getComments", commentId.taskId)
+            } catch (error) {
+                console.error(error, "addTask Failing");
             }
         },
 

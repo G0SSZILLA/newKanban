@@ -51,23 +51,23 @@ The Web client will be a vue application. The project has already been initializ
 
 ### Visualization
 
-- The Front End is styled (this is a broad concept, but put a bit of effort into it as this makes a great portfolio piece)
-- A user should not have to re-login everytime they refresh the page
-- From the **Boards** Page Users can create/delete their own boards
-- From the **Board** Page a user can create/delete The Lists associated with the board
-- Tasks can be created/deleted inside any list on the **Board** page
-- Tasks can be moved between lists (Does not have to be drag and drop)
-- A user can add and remove comments to a Task
+[x] The Front End is styled (this is a broad concept, but put a bit of effort into it as this makes a great portfolio piece)
+[x] A user should not have to re-login everytime they refresh the page
+[] From the **Boards** Page Users can create/delete their own boards
+[x] From the **Board** Page a user can create/delete The Lists associated with the board
+[] Tasks can be created/deleted inside any list on the **Board** page
+[] Tasks can be moved between lists (Does not have to be drag and drop)
+[] A user can add and remove comments to a Task
 
 ### Functionality
 
-- Only the creator of an object can delete it
-- A user Must have the ability to log in and out.
-- The Backend needs to be able to create and store the boards created by users
-- Each board can have lists
-- Each List can have tasks
-- Each task can have comments
-- Only authenticated users currently logged in can access the api
+[x] Only the creator of an object can delete it
+[x] A user Must have the ability to log in and out.
+[x] The Backend needs to be able to create and store the boards created by users
+[x] Each board can have lists
+[x] Each List can have tasks
+[] Each task can have comments
+[x] Only authenticated users currently logged in can access the api
 
 ### Bonus Ideas:
 - Add to the front and backend the ability to have collaborators on boards

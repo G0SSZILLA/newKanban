@@ -84,7 +84,7 @@ export default {
 .backgroundImg {
   background-image: url(https://i.pinimg.com/originals/b4/8e/6d/b48e6d6ada7017fa19bc2cd91b9085ed.jpg);
   background-size: cover;
-  filter: blur(px);
+  filter: blur();
 }
 .colorOverlay {
   height: 100%;

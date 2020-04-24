@@ -50,7 +50,7 @@
                 class="form-control text-center w-50"
                 placeholder="Add Task..."
                 v-model="newTask.title"/>
-              <button type="submit" class="btn btn-sm btn-primary d-flex" @click="addTask()">Create</button>
+              <button type="submit" class="btn btn-sm btn-warning d-flex" @click="addTask()">Create</button>
             </form>
           </div>
         </div>
@@ -62,7 +62,6 @@
 
 
 <script>
-// import CreateTask from "../components/CreateTask.vue";
 import Task from "../components/Task.vue";
 // NOTE NEED TO FINISH FUNCTIONALITY!!!!!!!
 export default {
